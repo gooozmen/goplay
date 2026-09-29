@@ -1,0 +1,75 @@
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+Failures (4):
+  JUnit Jupiter:TestFileFormat20:testInvalidFile()
+    MethodSource [className = 'app.tuxguitar.io.tg.TestFileFormat20', methodName = 'testInvalidFile', methodParameterTypes = '']
+    => java.io.FileNotFoundException: /home/gooozmen/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/program/tuxguitar-master/.local-build/out/test/Untitled_extended_30.tg (No such file or directory)
+       java.base/java.io.FileInputStream.open0(Native Method)
+       java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+       java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+       app.tuxguitar.io.tg.TestFileFormat20.validatesSchema(TestFileFormat20.java:623)
+       app.tuxguitar.io.tg.TestFileFormat20.testInvalidFile(TestFileFormat20.java:104)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:569)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       [...]
+  JUnit Jupiter:TestFileFormat20:testRecognizeValidFile()
+    MethodSource [className = 'app.tuxguitar.io.tg.TestFileFormat20', methodName = 'testRecognizeValidFile', methodParameterTypes = '']
+    => java.io.FileNotFoundException: /home/gooozmen/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/program/tuxguitar-master/.local-build/out/test/Untitled_20.xml (No such file or directory)
+       java.base/java.io.FileInputStream.open0(Native Method)
+       java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+       java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+       app.tuxguitar.io.tg.TestFileFormat20.validatesSchema(TestFileFormat20.java:623)
+       app.tuxguitar.io.tg.TestFileFormat20.testRecognizeValidFile(TestFileFormat20.java:69)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:569)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       [...]
+  JUnit Jupiter:TestFileFormat20:testWrittenFileValidatesSchema()
+    MethodSource [className = 'app.tuxguitar.io.tg.TestFileFormat20', methodName = 'testWrittenFileValidatesSchema', methodParameterTypes = '']
+    => java.io.FileNotFoundException: /home/gooozmen/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/program/tuxguitar-master/.local-build/out/test/Untitled_20.tg (No such file or directory)
+       java.base/java.io.FileInputStream.open0(Native Method)
+       java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+       java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+       app.tuxguitar.io.tg.TestFileFormat20.tg20ToXml(TestFileFormat20.java:656)
+       app.tuxguitar.io.tg.TestFileFormat20.testWrittenFileValidatesSchema(TestFileFormat20.java:441)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:569)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       [...]
+  JUnit Jupiter:TestFileFormat20:testXmlCanBeExtended()
+    MethodSource [className = 'app.tuxguitar.io.tg.TestFileFormat20', methodName = 'testXmlCanBeExtended', methodParameterTypes = '']
+    => java.io.FileNotFoundException: /home/gooozmen/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/program/tuxguitar-master/.local-build/out/test/Untitled_extended_21.tg (No such file or directory)
+       java.base/java.io.FileInputStream.open0(Native Method)
+       java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+       java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+       app.tuxguitar.io.tg.TestFileFormat20.detectsFormat(TestFileFormat20.java:635)
+       app.tuxguitar.io.tg.TestFileFormat20.testXmlCanBeExtended(TestFileFormat20.java:79)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+       java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+       java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+       java.base/java.lang.reflect.Method.invoke(Method.java:569)
+       org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:727)
+       [...]
+
+Test run finished after 1212 ms
+[        15 containers found      ]
+[         0 containers skipped    ]
+[        15 containers started    ]
+[         0 containers aborted    ]
+[        15 containers successful ]
+[         0 containers failed     ]
+[        67 tests found           ]
+[         0 tests skipped         ]
+[        67 tests started         ]
+[         0 tests aborted         ]
+[        63 tests successful      ]
+[         4 tests failed          ]
+

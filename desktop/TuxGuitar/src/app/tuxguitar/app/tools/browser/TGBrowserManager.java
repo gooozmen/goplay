@@ -1,0 +1,169 @@
+package app.tuxguitar.app.tools.browser;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import app.tuxguitar.app.TuxGuitar;
+import app.tuxguitar.app.tools.browser.base.TGBrowserFactory;
+import app.tuxguitar.app.tools.browser.filesystem.TGBrowserFactoryImpl;
+import app.tuxguitar.app.tools.browser.xml.TGBrowserReader;
+import app.tuxguitar.app.tools.browser.xml.TGBrowserWriter;
+import app.tuxguitar.app.util.TGFileUtils;
+import app.tuxguitar.tools.browser.TGBrowserCollection;
+import app.tuxguitar.tools.browser.base.TGBrowserSettings;
+import app.tuxguitar.util.TGContext;
+import app.tuxguitar.util.singleton.TGSingletonFactory;
+import app.tuxguitar.util.singleton.TGSingletonUtil;
+
+public class TGBrowserManager {
+
+	private TGContext context;
+	private List<TGBrowserFactory> factories;
+	private List<TGBrowserCollection> collections;
+	private boolean changes;
+
+	private TGBrowserFactoryListener handler;
+
+	private TGBrowserManager(TGContext context){
+		this.context = context;
+		this.factories = new ArrayList<TGBrowserFactory>();
+		this.collections = new ArrayList<TGBrowserCollection>();
+		this.readCollections();
+		this.addDefaultFactory();
+	}
+
+	public void setFactoryHandler(TGBrowserFactoryListener handler){
+		this.handler = handler;
+	}
+
+	public Iterator<TGBrowserFactory> getFactories(){
+		return this.factories.iterator();
+	}
+
+	public TGBrowserFactory getFactory(String type){
+		Iterator<TGBrowserFactory> factories = getFactories();
+		while(factories.hasNext()){
+			TGBrowserFactory factory = factories.next();
+			if(factory.getType().equals(type)){
+				return factory;
+			}
+		}
+		return null;
+	}
+
+	public void addFactory(TGBrowserFactory factory){
+		this.factories.add(factory);
+
+		if(this.handler != null){
+			this.handler.notifyAdded();
+		}
+	}
+
+	public void removeFactory(TGBrowserFactory factory){
+		this.factories.remove(factory);
+
+		int index = 0;
+		while(index < this.collections.size()){
+			TGBrowserCollection collection = this.collections.get(index);
+			if(collection.getType().equals(factory.getType())){
+				removeCollection(collection);
+				continue;
+			}
+			index ++;
+		}
+		if(this.handler != null){
+			this.handler.notifyRemoved();
+		}
+	}
+
+	public Iterator<TGBrowserCollection> getCollections(){
+		return this.collections.iterator();
+	}
+
+	public int countCollections(){
+		return this.collections.size();
+	}
+
+	public void removeCollection(TGBrowserCollection collection){
+		this.collections.remove(collection);
+		this.changes = true;
+	}
+
+	public TGBrowserCollection addCollection(TGBrowserCollection collection){
+		if( collection.getSettings() != null ){
+			TGBrowserCollection existent = getCollection(collection.getType(), collection.getSettings());
+			if( existent != null ){
+				return existent;
+			}
+			this.collections.add(collection);
+			this.changes = true;
+		}
+		return collection;
+	}
+
+	public TGBrowserCollection getCollection(String type, TGBrowserSettings data){
+		Iterator<TGBrowserCollection> it = this.getCollections();
+		while( it.hasNext() ){
+			TGBrowserCollection collection = it.next();
+			if( collection.getType().equals(type) && collection.getSettings().getTitle().equals(data.getTitle()) && collection.getSettings().getData().equals(data.getData()) ){
+				return collection;
+			}
+		}
+		return null;
+	}
+
+	public TGBrowserCollection getCollection(int index){
+		if(index >= 0 && index < countCollections()){
+			return this.collections.get(index);
+		}
+		return null;
+	}
+
+	public void readCollections(){
+		File file = new File(getCollectionsFileName());
+		if (file.exists()){
+			new TGBrowserReader().loadCollections(this,file);
+		} else {
+			loadDemoCollection();
+		}
+		this.changes = false;
+	}
+
+	public void writeCollections(){
+		if(this.changes){
+			new TGBrowserWriter().saveCollections(this,getCollectionsFileName());
+		}
+		this.changes = false;
+	}
+
+	public TGBrowserCollection loadDemoCollection(){
+		TGBrowserCollection collection = new TGBrowserCollection();
+		collection.setType("file.system");
+		collection.setSettings(new TGBrowserSettings());
+		collection.getSettings().setTitle(TuxGuitar.getProperty("browser.collection.demo-songs"));
+		collection.getSettings().setData(TGFileUtils.PATH_HOME + File.separator + System.getProperty("tuxguitar.share.path") + File.separator + "demo-songs");
+		return this.addCollection(collection);
+	}
+
+	private String getCollectionsFileName(){
+		return TGFileUtils.PATH_USER_CONFIG + File.separator + "browser-collections.xml";
+	}
+
+	private void addDefaultFactory(){
+		this.addFactory(new TGBrowserFactoryImpl(this.context));
+	}
+
+	public TGContext getContext() {
+		return context;
+	}
+
+	public static TGBrowserManager getInstance(TGContext context) {
+		return TGSingletonUtil.getInstance(context, TGBrowserManager.class.getName(), new TGSingletonFactory<TGBrowserManager>() {
+			public TGBrowserManager createInstance(TGContext context) {
+				return new TGBrowserManager(context);
+			}
+		});
+	}
+}

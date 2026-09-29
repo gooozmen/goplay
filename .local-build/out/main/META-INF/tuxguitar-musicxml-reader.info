@@ -1,0 +1,5 @@
+### Plugin Information ###
+plugin.name=MusicXML file import plugin
+plugin.description=Plugin to open MusicXML (.musicxml, .xml, .mxl) files
+plugin.author=TG Reader
+plugin.version=1.0

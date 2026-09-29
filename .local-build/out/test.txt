@@ -1,0 +1,12 @@
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/io/tg/TestFileFormat20.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/player/base/TestLetRing.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/player/base/TestRepeatController.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/player/base/TestSequenceParser.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/song/managers/TestAllocateNotesToStrings.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/song/managers/TestFreeEditionMode.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/song/managers/TestTrackManager.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/song/models/TestTGDuration.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/song/models/TestTrack.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/util/TestMusicKeyUtils.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-lib/src/test/java/app/tuxguitar/util/TestVersion.java
+/home/gooozmen/Документы/program/tuxguitar-master/common/TuxGuitar-musicxml-reader/test/java/app/tuxguitar/io/musicxml/reader/MusicXMLSongReaderTest.java

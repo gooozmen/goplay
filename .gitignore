@@ -1,0 +1,14 @@
+.gradle/
+build/
+doc/javadoc/
+target/
+*.o
+*.bin
+**/jni/*.dll
+**/jni/*.so
+.classpath
+.settings/
+.project
+android/build-scripts/tuxguitar-android/local.properties
+android/build-scripts/tuxguitar-android/.idea/
+.DS_Store
