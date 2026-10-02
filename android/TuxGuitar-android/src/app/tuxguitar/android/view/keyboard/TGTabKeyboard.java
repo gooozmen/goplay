@@ -1,7 +1,5 @@
 package app.tuxguitar.android.view.keyboard;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
@@ -27,41 +25,24 @@ import app.tuxguitar.editor.action.note.TGDecrementNoteSemitoneAction;
 import app.tuxguitar.editor.action.note.TGDeleteNoteOrRestAction;
 import app.tuxguitar.editor.action.note.TGIncrementNoteSemitoneAction;
 import app.tuxguitar.editor.action.note.TGInsertRestBeatAction;
+import app.tuxguitar.editor.action.note.TGMoveBeatsLeftAction;
+import app.tuxguitar.editor.action.note.TGMoveBeatsRightAction;
 import app.tuxguitar.editor.action.note.TGSetNoteFretNumberAction;
 import app.tuxguitar.song.models.TGTrack;
+import app.tuxguitar.android.view.sheet.TGQuickSheetController;
 import app.tuxguitar.util.TGContext;
 
 public class TGTabKeyboard extends FrameLayout {
 
 	private static final int[] NOTATION_HIDDEN_KEY_IDS = new int[] {
-		R.id.tab_kb_button_insert,
-		R.id.tab_kb_button_delete,
-		R.id.tab_kb_button_increment_duration,
-		R.id.tab_kb_button_set_duration,
-		R.id.tab_kb_button_decrement_duration,
-		R.id.tab_kb_button_number_0,
-		R.id.tab_kb_button_number_1,
-		R.id.tab_kb_button_number_2,
-		R.id.tab_kb_button_number_3,
-		R.id.tab_kb_button_number_4,
-		R.id.tab_kb_button_number_5,
-		R.id.tab_kb_button_number_6,
-		R.id.tab_kb_button_number_7,
-		R.id.tab_kb_button_number_8,
-		R.id.tab_kb_button_number_9
-	};
-
-	private static final int[] NOTATION_INVISIBLE_KEY_IDS = new int[] {
-		R.id.tab_kb_button_left,
-		R.id.tab_kb_button_select,
-		R.id.tab_kb_button_right
+		R.id.tab_kb_fret_keys,
+		R.id.tab_kb_duration_keys,
+		R.id.tab_kb_caret_keys
 	};
 
 	private boolean notationMode;
 	private TGActionProcessorListener moveUp;
 	private TGActionProcessorListener moveDown;
-	private TGActionProcessorListener semitoneUp;
-	private TGActionProcessorListener semitoneDown;
 
 	public TGTabKeyboard(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -82,8 +63,6 @@ public class TGTabKeyboard extends FrameLayout {
 		TGContext context = this.findContext();
 		this.moveUp = new TGActionProcessorListener(context, TGGoUpAction.NAME);
 		this.moveDown = new TGActionProcessorListener(context, TGGoDownAction.NAME);
-		this.semitoneUp = new TGActionProcessorListener(context, TGIncrementNoteSemitoneAction.NAME);
-		this.semitoneDown = new TGActionProcessorListener(context, TGDecrementNoteSemitoneAction.NAME);
 
 		findViewById(R.id.tab_kb_button_number_0).setOnClickListener(new TGActionProcessorListener(context, TGSetNoteFretNumberAction.getActionName(0)));
 		findViewById(R.id.tab_kb_button_number_1).setOnClickListener(new TGActionProcessorListener(context, TGSetNoteFretNumberAction.getActionName(1)));
@@ -97,6 +76,10 @@ public class TGTabKeyboard extends FrameLayout {
 		findViewById(R.id.tab_kb_button_number_9).setOnClickListener(new TGActionProcessorListener(context, TGSetNoteFretNumberAction.getActionName(9)));
 
 		findViewById(R.id.tab_kb_button_add_note).setOnClickListener(new TGActionProcessorListener(context, TGInsertScoreNoteAction.NAME));
+		findViewById(R.id.tab_kb_button_note_left).setOnClickListener(new TGActionProcessorListener(context, TGMoveBeatsLeftAction.NAME));
+		findViewById(R.id.tab_kb_button_note_right).setOnClickListener(new TGActionProcessorListener(context, TGMoveBeatsRightAction.NAME));
+		findViewById(R.id.tab_kb_button_note_up).setOnClickListener(new TGActionProcessorListener(context, TGIncrementNoteSemitoneAction.NAME));
+		findViewById(R.id.tab_kb_button_note_down).setOnClickListener(new TGActionProcessorListener(context, TGDecrementNoteSemitoneAction.NAME));
 		findViewById(R.id.tab_kb_button_insert).setOnClickListener(new TGActionProcessorListener(context, TGInsertRestBeatAction.NAME));
 		findViewById(R.id.tab_kb_button_delete).setOnClickListener(new TGActionProcessorListener(context, TGDeleteNoteOrRestAction.NAME));
 
@@ -148,67 +131,44 @@ public class TGTabKeyboard extends FrameLayout {
 		TGCaret caret = (controller != null ? controller.getCaret() : null);
 		TGTrack track = (caret != null ? caret.getTrack() : null);
 		boolean notation = (track != null && !track.hasTablature());
-		boolean noteEditing = (notation && caret.isNoteEditing());
-		boolean noteFocus = (notation && caret.isNoteFocus());
-
 		if( notation != this.notationMode ) {
 			this.notationMode = notation;
 			for( int id : NOTATION_HIDDEN_KEY_IDS ) {
 				findViewById(id).setVisibility(notation ? GONE : VISIBLE);
 			}
-			for( int id : NOTATION_INVISIBLE_KEY_IDS ) {
-				findViewById(id).setVisibility(notation ? INVISIBLE : VISIBLE);
-			}
-			findViewById(R.id.tab_kb_button_add_note).setVisibility(notation ? VISIBLE : GONE);
-			findViewById(R.id.tab_kb_button_up).setOnClickListener(notation ? this.semitoneUp : this.moveUp);
-			findViewById(R.id.tab_kb_button_down).setOnClickListener(notation ? this.semitoneDown : this.moveDown);
-			if( !notation ) {
-				findViewById(R.id.tab_kb_button_up).setEnabled(true);
-				findViewById(R.id.tab_kb_button_down).setEnabled(true);
-			}
+			findViewById(R.id.tab_kb_note_keys).setVisibility(notation ? VISIBLE : GONE);
 		}
 
-		if( notation ) {
-			findViewById(R.id.tab_kb_button_up).setEnabled(noteFocus);
-			findViewById(R.id.tab_kb_button_down).setEnabled(noteFocus);
-			if( noteEditing ) {
-				this.applyShown();
-			} else {
-				this.applyHidden();
-			}
-		}
+		boolean canMoveNote = (notation && caret != null && caret.getSelectedNote() != null);
+		findViewById(R.id.tab_kb_button_note_up).setEnabled(!notation || canMoveNote);
+		findViewById(R.id.tab_kb_button_note_down).setEnabled(!notation || canMoveNote);
+		findViewById(R.id.tab_kb_button_note_left).setEnabled(!notation || canMoveNote);
+		findViewById(R.id.tab_kb_button_note_right).setEnabled(!notation || canMoveNote);
 	}
 
 	private void applyShown() {
 		this.clearAnimation();
 		this.setTranslationY(0f);
 		this.setVisibility(VISIBLE);
+		this.notifySheet();
 	}
 
 	private void applyHidden() {
 		this.clearAnimation();
 		this.setVisibility(GONE);
+		this.notifySheet();
 	}
 
 	public void toggleVisibility() {
-		this.clearAnimation();
 		if( this.getVisibility() == VISIBLE ) {
-			this.animate().setDuration(300).translationY(this.getHeight()).setListener(new AnimatorListenerAdapter() {
-				public void onAnimationEnd(Animator animation) {
-					super.onAnimationEnd(animation);
-					TGTabKeyboard.this.clearAnimation();
-					TGTabKeyboard.this.setVisibility(GONE);
-				}
-			});
+			this.applyHidden();
 		} else {
-			this.setVisibility(VISIBLE);
-			this.animate().setDuration(300).translationY(0f).setListener(new AnimatorListenerAdapter() {
-				public void onAnimationEnd(Animator animation) {
-					super.onAnimationEnd(animation);
-					TGTabKeyboard.this.clearAnimation();
-				}
-			});
+			this.applyShown();
 		}
+	}
+
+	private void notifySheet() {
+		TGQuickSheetController.getInstance(this.findContext()).updateItems();
 	}
 
 	private TGActivity findActivity() {

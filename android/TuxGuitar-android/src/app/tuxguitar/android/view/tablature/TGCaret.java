@@ -91,9 +91,6 @@ public class TGCaret {
 	}
 
 	public void moveTo(TGTrackImpl selectedTrack, TGMeasureImpl selectedMeasure, TGBeat selectedBeat, int string) {
-		if( this.selectedTrack != selectedTrack || this.selectedBeat != selectedBeat ) {
-			this.noteFocus = false;
-		}
 		this.selectedTrack = selectedTrack;
 		this.selectedMeasure = selectedMeasure;
 		this.selectedBeat = selectedBeat;

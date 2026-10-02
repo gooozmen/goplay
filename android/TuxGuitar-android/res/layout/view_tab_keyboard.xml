@@ -2,9 +2,10 @@
 	android:id="@+id/tgTabKeyboard"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
+	android:visibility="gone"
 	style="?attr/tabKeyBoardStyle">
 
-	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	<TableLayout
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:padding="4dp"
@@ -12,83 +13,125 @@
 		>
 
 		<TableRow android:gravity="center_vertical" >
-			<RelativeLayout android:gravity="left">
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_7"
-					style="?attr/tabKeyBoardImageButtonKey7Style"/>
+				<RelativeLayout
+					android:id="@+id/tab_kb_fret_keys"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:gravity="left">
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_8"
-					android:layout_toRightOf="@+id/tab_kb_button_number_7"
-					style="?attr/tabKeyBoardImageButtonKey8Style" />
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_7"
+						style="?attr/tabKeyBoardImageButtonKey7Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_9"
-					android:layout_toRightOf="@+id/tab_kb_button_number_8"
-					style="?attr/tabKeyBoardImageButtonKey9Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_8"
+						android:layout_toRightOf="@+id/tab_kb_button_number_7"
+						style="?attr/tabKeyBoardImageButtonKey8Style" />
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_4"
-					android:layout_below="@+id/tab_kb_button_number_7"
-					style="?attr/tabKeyBoardImageButtonKey4Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_9"
+						android:layout_toRightOf="@+id/tab_kb_button_number_8"
+						style="?attr/tabKeyBoardImageButtonKey9Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_5"
-					android:layout_below="@+id/tab_kb_button_number_8"
-					android:layout_toRightOf="@+id/tab_kb_button_number_4"
-					style="?attr/tabKeyBoardImageButtonKey5Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_4"
+						android:layout_below="@+id/tab_kb_button_number_7"
+						style="?attr/tabKeyBoardImageButtonKey4Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_6"
-					android:layout_below="@+id/tab_kb_button_number_9"
-					android:layout_toRightOf="@+id/tab_kb_button_number_5"
-					style="?attr/tabKeyBoardImageButtonKey6Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_5"
+						android:layout_below="@+id/tab_kb_button_number_8"
+						android:layout_toRightOf="@+id/tab_kb_button_number_4"
+						style="?attr/tabKeyBoardImageButtonKey5Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_1"
-					android:layout_below="@+id/tab_kb_button_number_4"
-					style="?attr/tabKeyBoardImageButtonKey1Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_6"
+						android:layout_below="@+id/tab_kb_button_number_9"
+						android:layout_toRightOf="@+id/tab_kb_button_number_5"
+						style="?attr/tabKeyBoardImageButtonKey6Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_2"
-					android:layout_below="@+id/tab_kb_button_number_5"
-					android:layout_toRightOf="@+id/tab_kb_button_number_1"
-					style="?attr/tabKeyBoardImageButtonKey2Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_1"
+						android:layout_below="@+id/tab_kb_button_number_4"
+						style="?attr/tabKeyBoardImageButtonKey1Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_3"
-					android:layout_below="@+id/tab_kb_button_number_6"
-					android:layout_toRightOf="@+id/tab_kb_button_number_2"
-					style="?attr/tabKeyBoardImageButtonKey3Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_2"
+						android:layout_below="@+id/tab_kb_button_number_5"
+						android:layout_toRightOf="@+id/tab_kb_button_number_1"
+						style="?attr/tabKeyBoardImageButtonKey2Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_insert"
-					android:layout_toRightOf="@+id/tab_kb_button_number_9"
-					style="?attr/tabKeyBoardImageButtonInsertStyle"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_3"
+						android:layout_below="@+id/tab_kb_button_number_6"
+						android:layout_toRightOf="@+id/tab_kb_button_number_2"
+						style="?attr/tabKeyBoardImageButtonKey3Style"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_delete"
-					android:layout_below="@+id/tab_kb_button_insert"
-					android:layout_toRightOf="@+id/tab_kb_button_number_6"
-					style="?attr/tabKeyBoardImageButtonDeleteStyle"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_insert"
+						android:layout_toRightOf="@+id/tab_kb_button_number_9"
+						style="?attr/tabKeyBoardImageButtonInsertStyle"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_number_0"
-					android:layout_below="@+id/tab_kb_button_delete"
-					android:layout_toRightOf="@+id/tab_kb_button_number_3"
-					style="?attr/tabKeyBoardImageButtonKey0Style"/>
+					<ImageButton
+						android:id="@+id/tab_kb_button_delete"
+						android:layout_below="@+id/tab_kb_button_insert"
+						android:layout_toRightOf="@+id/tab_kb_button_number_6"
+						style="?attr/tabKeyBoardImageButtonDeleteStyle"/>
 
-				<ImageButton
-					android:id="@+id/tab_kb_button_add_note"
-					android:layout_below="@+id/tab_kb_button_delete"
-					android:layout_toRightOf="@+id/tab_kb_button_number_3"
-					android:contentDescription="@string/action_note_add"
-					android:visibility="gone"
-					style="@style/TGKeyBoardButton.AddNote"/>
-			</RelativeLayout>
+					<ImageButton
+						android:id="@+id/tab_kb_button_number_0"
+						android:layout_below="@+id/tab_kb_button_delete"
+						android:layout_toRightOf="@+id/tab_kb_button_number_3"
+						style="?attr/tabKeyBoardImageButtonKey0Style"/>
+				</RelativeLayout>
+
+				<RelativeLayout
+					android:id="@+id/tab_kb_note_keys"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:visibility="gone">
+
+					<ImageButton
+						android:id="@+id/tab_kb_button_note_left"
+						android:contentDescription="@string/action_move_beats_left"
+						style="?attr/tabKeyBoardImageButtonLeftStyle"/>
+
+					<ImageButton
+						android:id="@+id/tab_kb_button_note_right"
+						android:layout_toRightOf="@+id/tab_kb_button_note_left"
+						android:contentDescription="@string/action_move_beats_right"
+						style="?attr/tabKeyBoardImageButtonRightStyle"/>
+
+					<ImageButton
+						android:id="@+id/tab_kb_button_add_note"
+						android:layout_below="@+id/tab_kb_button_note_left"
+						android:contentDescription="@string/action_note_add"
+						style="@style/TGKeyBoardButton.AddNote"/>
+
+					<ImageButton
+						android:id="@+id/tab_kb_button_note_up"
+						android:layout_toRightOf="@+id/tab_kb_button_add_note"
+						android:layout_below="@+id/tab_kb_button_note_right"
+						android:contentDescription="@string/action_increment_note_semitone"
+						style="?attr/tabKeyBoardImageButtonUpStyle"/>
+
+					<ImageButton
+						android:id="@+id/tab_kb_button_note_down"
+						android:layout_below="@+id/tab_kb_button_note_up"
+						android:layout_toRightOf="@+id/tab_kb_button_add_note"
+						android:contentDescription="@string/action_decrement_note_semitone"
+						style="?attr/tabKeyBoardImageButtonDownStyle"/>
+				</RelativeLayout>
+			</FrameLayout>
 
 			<LinearLayout
+				android:id="@+id/tab_kb_duration_keys"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:gravity="center"
 				android:orientation="vertical" >
 
@@ -106,14 +149,17 @@
 			</LinearLayout>
 
 			<GridLayout
+				android:id="@+id/tab_kb_caret_keys"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:gravity="right"
 				android:columnCount="3" >
 
-				<Space android:layout_gravity="fill" />
+				<Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="fill" />
 				<ImageButton
 					android:id="@+id/tab_kb_button_up"
 					style="?attr/tabKeyBoardImageButtonUpStyle"/>
-				<Space android:layout_gravity="fill" />
+				<Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="fill" />
 
 				<ImageButton
 					android:id="@+id/tab_kb_button_left"
@@ -125,11 +171,11 @@
 					android:id="@+id/tab_kb_button_right"
 					style="?attr/tabKeyBoardImageButtonRightStyle"/>
 
-				<Space android:layout_gravity="fill" />
+				<Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="fill" />
 				<ImageButton
 					android:id="@+id/tab_kb_button_down"
 					style="?attr/tabKeyBoardImageButtonDownStyle"/>
-				<Space android:layout_gravity="fill" />
+				<Space android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="fill" />
 			</GridLayout>
 
 		</TableRow>

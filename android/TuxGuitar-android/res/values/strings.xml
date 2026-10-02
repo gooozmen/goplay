@@ -32,6 +32,8 @@
 	<string name="action_menu_effects">Effects</string>
 	<string name="action_menu_transport">Player</string>
 	<string name="action_menu_settings">Settings</string>
+	<string name="quick_sheet_play">Play</string>
+	<string name="quick_sheet_edit">Edit</string>
 
 	<string name="action_tab_keyboard_toggle">Toggle Keyboard</string>
 
@@ -241,6 +243,8 @@
 	<string name="preferences_general_title">General</string>
 	<string name="preferences_general_use_collection_browser_title">Collection Browser</string>
 	<string name="preferences_general_use_collection_browser_summary">Use Collection Browser to browse files</string>
+
+	<string name="preferences_view_category_title">Display</string>
 
 	<string name="preferences_sound_category_title">Sound</string>
 	<string name="preferences_midi_output_port_title">MIDI Port</string>

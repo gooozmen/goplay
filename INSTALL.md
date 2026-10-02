@@ -26,7 +26,11 @@ You can also try to build TuxGuitar using the [GitHub Actions](https://docs.gith
 - Jack (optional)
 - Eclipse SWT 4
 
+
+
 ## Build on Debian/Ubuntu Linux
+
+
 
 ### Install Prerequisites
 
@@ -47,12 +51,16 @@ $ mvn install:install-file -Dfile=swt.jar -DgroupId=org.eclipse.swt -DartifactId
 $ cd ..
 ```
 
+
+
 ### Get the TuxGuitar sources
 
 ```sh
 $ git clone https://github.com/helge17/tuxguitar.git
 $ cd tuxguitar
 ```
+
+
 
 ### Build and install
 
@@ -62,6 +70,8 @@ $ mvn -e clean verify -P native-modules
 $ sudo dpkg -i target/tuxguitar-*.deb
 ```
 
+
+
 ### Start TuxGuitar
 
 Now you can start TuxGuitar from your Desktop menu or on the command line with
@@ -69,6 +79,8 @@ Now you can start TuxGuitar from your Desktop menu or on the command line with
 ```sh
 $ tuxguitar
 ```
+
+
 
 ## Generic GNU/Linux
 
@@ -86,6 +98,8 @@ $ cd target/tuxguitar-*
 $ ./tuxguitar.sh
 ```
 
+
+
 ## Build for Windows on Linux
 
 The Windows version is cross compiled on Ubuntu/Debian with [Mingw-w64](https://mingw-w64.org/).
@@ -93,8 +107,10 @@ The Windows version is cross compiled on Ubuntu/Debian with [Mingw-w64](https://
 ### Install Prerequisites
 
 ```sh
-$ sudo apt install wget unzip git default-jdk maven gcc-mingw-w64-x86-64 g++-mingw-w64-i686-win32
+4$ sudo apt install wget unzip git default-jdk maven gcc-mingw-w64-x86-64 g++-mingw-w64-i686-win32
 ```
+
+
 
 ### Download and install SWT for Windows
 
@@ -106,6 +122,8 @@ $ unzip ../swt-4.37-win32-win32-x86_64.zip
 $ mvn install:install-file -Dfile=swt.jar -DgroupId=org.eclipse.swt -DartifactId=org.eclipse.swt.win32.win32 -Dpackaging=jar -Dversion=4.37
 $ cd ..
 ```
+
+
 
 ### Get the TuxGuitar sources
 
@@ -135,6 +153,8 @@ On macOS you need to download and install [Homebrew](https://brew.sh) to build T
 $ brew install openjdk maven wget
 ```
 
+
+
 ### Download and install SWT for macOS
 
 ```sh
@@ -146,6 +166,8 @@ $ unzip ../swt-4.37-cocoa-macosx-${TUX_ARCH}.zip
 $ mvn install:install-file -Dfile=swt.jar -DgroupId=org.eclipse.swt -DartifactId=org.eclipse.swt.cocoa.macosx -Dpackaging=jar -Dversion=4.37
 $ cd ..
 ```
+
+
 
 ### Get the TuxGuitar sources
 
@@ -163,6 +185,8 @@ The application is now located in the `desktop/build-scripts/tuxguitar-macosx-sw
 
 ## Build on FreeBSD
 
+
+
 ### Install Prerequisites
 
 ```sh
@@ -178,6 +202,8 @@ On FreeBSD we use SWT from the OS to build and run TuxGuitar. FreeBSD 14.2 comes
 ```sh
 mvn install:install-file -Dfile=/usr/local/share/java/classes/swt.jar -DgroupId=org.eclipse.swt -DartifactId=org.eclipse.swt.gtk.freebsd -Dpackaging=jar -Dversion=4.21
 ```
+
+
 
 ### Get the TuxGuitar sources
 
@@ -195,7 +221,11 @@ $ cd target/tuxguitar-*
 $ ./tuxguitar.sh
 ```
 
+
+
 ## Build the Windows version on Windows
+
+
 
 ### How to install WSL2 and Ubuntu
 
@@ -238,6 +268,7 @@ This will copy the files to c:\tuxguitar on your Windows machine, adjust the /mn
 ## Troubleshooting
 
 There may be some cases where the build fails. Just a few examples (not exhaustive list):
+
 - TuxGuitar sources have been placed in a folder whose absolute path contains non-ASCII characters
 - During development of a feature some unit tests are broken
 - other configuration-specific issues

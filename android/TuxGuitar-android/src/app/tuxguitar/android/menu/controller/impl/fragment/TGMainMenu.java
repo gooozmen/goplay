@@ -9,24 +9,12 @@ import app.tuxguitar.android.R;
 import app.tuxguitar.android.action.TGActionProcessorListener;
 import app.tuxguitar.android.action.impl.gui.TGOpenDialogAction;
 import app.tuxguitar.android.action.impl.gui.TGOpenFragmentAction;
-import app.tuxguitar.android.action.impl.gui.TGOpenMenuAction;
 import app.tuxguitar.android.action.impl.transport.TGTransportPlayAction;
-import app.tuxguitar.android.action.impl.view.TGToggleTabKeyboardAction;
 import app.tuxguitar.android.activity.TGActivity;
 import app.tuxguitar.android.activity.TGActivityController;
 import app.tuxguitar.android.fragment.TGFragmentController;
 import app.tuxguitar.android.fragment.impl.TGPreferencesFragmentController;
 import app.tuxguitar.android.menu.controller.TGMenuController;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGBeatMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGCompositionMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGDurationMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGEditMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGEffectMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGMeasureMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGTrackMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGTransportMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGVelocityMenu;
-import app.tuxguitar.android.menu.controller.impl.contextual.TGViewMenu;
 import app.tuxguitar.android.menu.util.TGToggleStyledIconHandler;
 import app.tuxguitar.android.menu.util.TGToggleStyledIconHelper;
 import app.tuxguitar.android.view.dialog.tempo.TGTempoDialogController;
@@ -56,18 +44,7 @@ public class TGMainMenu implements TGMenuController {
 	}
 
 	public void initializeItems(Menu menu) {
-		menu.findItem(R.id.action_tab_keyboard_toggle).setOnMenuItemClickListener(createActionProcessor(TGToggleTabKeyboardAction.NAME));
 		menu.findItem(R.id.action_transport_play).setOnMenuItemClickListener(createActionProcessor(TGTransportPlayAction.NAME));
-		menu.findItem(R.id.action_menu_edit).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGEditMenu(getActivity())));
-		menu.findItem(R.id.action_menu_view).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGViewMenu(getActivity())));
-		menu.findItem(R.id.action_menu_composition).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGCompositionMenu(getActivity())));
-		menu.findItem(R.id.action_menu_track).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGTrackMenu(getActivity())));
-		menu.findItem(R.id.action_menu_measure).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGMeasureMenu(getActivity())));
-		menu.findItem(R.id.action_menu_beat).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGBeatMenu(getActivity())));
-		menu.findItem(R.id.action_menu_duration).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGDurationMenu(getActivity())));
-		menu.findItem(R.id.action_menu_dynamic).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGVelocityMenu(getActivity())));
-		menu.findItem(R.id.action_menu_effects).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGEffectMenu(getActivity())));
-		menu.findItem(R.id.action_menu_transport).setOnMenuItemClickListener(createContextMenuActionProcessor(new TGTransportMenu(getActivity())));
 		menu.findItem(R.id.action_menu_settings).setOnMenuItemClickListener(createFragmentActionProcessor(new TGPreferencesFragmentController()));
 
 		this.tempoDisplayItem =  (TextView) menu.findItem(R.id.action_tempo_display).getActionView().findViewById(R.id.tempo_display_item);
@@ -131,13 +108,6 @@ public class TGMainMenu implements TGMenuController {
 		TGActionProcessorListener tgActionProcessor = new TGActionProcessorListener(getContext(), TGOpenFragmentAction.NAME);
 		tgActionProcessor.setAttribute(TGOpenFragmentAction.ATTRIBUTE_CONTROLLER, controller);
 		tgActionProcessor.setAttribute(TGOpenFragmentAction.ATTRIBUTE_ACTIVITY, getActivity());
-		return tgActionProcessor;
-	}
-
-	public TGActionProcessorListener createContextMenuActionProcessor(TGMenuController controller) {
-		TGActionProcessorListener tgActionProcessor = new TGActionProcessorListener(getContext(), TGOpenMenuAction.NAME);
-		tgActionProcessor.setAttribute(TGOpenMenuAction.ATTRIBUTE_MENU_CONTROLLER, controller);
-		tgActionProcessor.setAttribute(TGOpenMenuAction.ATTRIBUTE_MENU_ACTIVITY, getActivity());
 		return tgActionProcessor;
 	}
 

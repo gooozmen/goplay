@@ -4,13 +4,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import app.tuxguitar.android.R;
+import app.tuxguitar.android.action.impl.layout.TGSetChordDiagramEnabledAction;
+import app.tuxguitar.android.action.impl.layout.TGSetChordNameEnabledAction;
+import app.tuxguitar.android.action.impl.layout.TGSetMultitrackEnabledAction;
+import app.tuxguitar.android.action.impl.layout.TGSetScoreEnabledAction;
 import app.tuxguitar.android.action.impl.storage.TGStorageLoadSettingsAction;
 import app.tuxguitar.android.action.impl.transport.TGTransportLoadSettingsAction;
 import app.tuxguitar.android.activity.TGActivity;
 import app.tuxguitar.android.properties.TGSharedPreferencesUtil;
 import app.tuxguitar.android.storage.TGStorageProperties;
 import app.tuxguitar.android.transport.TGTransportProperties;
+import app.tuxguitar.android.view.tablature.TGSongViewController;
 import app.tuxguitar.editor.action.TGActionProcessor;
+import app.tuxguitar.graphics.control.TGLayout;
 import app.tuxguitar.player.base.MidiOutputPort;
 import app.tuxguitar.player.base.MidiPlayer;
 import app.tuxguitar.util.TGContext;
@@ -30,6 +36,11 @@ public class TGPreferencesFragment extends PreferenceFragmentCompat implements S
 	public static final String MODULE = "tuxguitar";
 	public static final String RESOURCE = "settings";
 
+	private static final String PREFERENCE_VIEW_SCORE = "view.show.score";
+	private static final String PREFERENCE_VIEW_MULTITRACK = "view.show.multitrack";
+	private static final String PREFERENCE_VIEW_CHORD_NAME = "view.show.chord.name";
+	private static final String PREFERENCE_VIEW_CHORD_DIAGRAM = "view.show.chord.diagram";
+
 	private Map<String, String> updateActionsMap;
 
 	@Override
@@ -45,6 +56,12 @@ public class TGPreferencesFragment extends PreferenceFragmentCompat implements S
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		this.bindViewPreferences();
+	}
+
+	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		this.getPreferenceManager().setSharedPreferencesName(TGSharedPreferencesUtil.getSharedPreferencesName(this.getActivity(), MODULE, RESOURCE));
 		this.addPreferencesFromResource(R.xml.preferences_main);
@@ -52,6 +69,7 @@ public class TGPreferencesFragment extends PreferenceFragmentCompat implements S
 		this.createUpdateActionsMap();
 		this.createSafPreferences();
 		this.createOutputPortPreferences();
+		this.createViewPreferences();
 	}
 
 	@Override
@@ -71,6 +89,52 @@ public class TGPreferencesFragment extends PreferenceFragmentCompat implements S
 	public void createSafPreferences() {
 		CheckBoxPreference checkBoxPreference = (CheckBoxPreference) this.findPreference(TGStorageProperties.PROPERTY_COLLECTION_BROWSER);
 		checkBoxPreference.setChecked(new TGStorageProperties(this.findContext()).isUseCollectionBrowser());
+	}
+
+	public void createViewPreferences() {
+		this.bindViewToggle(PREFERENCE_VIEW_SCORE, TGLayout.DISPLAY_SCORE, TGSetScoreEnabledAction.NAME);
+		this.bindViewToggle(PREFERENCE_VIEW_MULTITRACK, TGLayout.DISPLAY_MULTITRACK, TGSetMultitrackEnabledAction.NAME);
+		this.bindViewToggle(PREFERENCE_VIEW_CHORD_NAME, TGLayout.DISPLAY_CHORD_NAME, TGSetChordNameEnabledAction.NAME);
+		this.bindViewToggle(PREFERENCE_VIEW_CHORD_DIAGRAM, TGLayout.DISPLAY_CHORD_DIAGRAM, TGSetChordDiagramEnabledAction.NAME);
+		this.bindViewPreferences();
+	}
+
+	private void bindViewToggle(String key, final int styleFlag, final String actionName) {
+		final CheckBoxPreference preference = (CheckBoxPreference) this.findPreference(key);
+		if( preference == null ) {
+			return;
+		}
+		preference.setPersistent(false);
+		preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			public boolean onPreferenceChange(Preference changed, Object value) {
+				boolean wanted = Boolean.TRUE.equals(value);
+				boolean current = isLayoutStyleEnabled(styleFlag);
+				if( wanted != current ) {
+					TGActionProcessor tgActionProcessor = new TGActionProcessor(findContext(), actionName);
+					tgActionProcessor.process();
+				}
+				return true;
+			}
+		});
+	}
+
+	private void bindViewPreferences() {
+		this.setViewChecked(PREFERENCE_VIEW_SCORE, TGLayout.DISPLAY_SCORE);
+		this.setViewChecked(PREFERENCE_VIEW_MULTITRACK, TGLayout.DISPLAY_MULTITRACK);
+		this.setViewChecked(PREFERENCE_VIEW_CHORD_NAME, TGLayout.DISPLAY_CHORD_NAME);
+		this.setViewChecked(PREFERENCE_VIEW_CHORD_DIAGRAM, TGLayout.DISPLAY_CHORD_DIAGRAM);
+	}
+
+	private void setViewChecked(String key, int styleFlag) {
+		CheckBoxPreference preference = (CheckBoxPreference) this.findPreference(key);
+		if( preference != null ) {
+			preference.setChecked(isLayoutStyleEnabled(styleFlag));
+		}
+	}
+
+	private boolean isLayoutStyleEnabled(int styleFlag) {
+		TGLayout layout = TGSongViewController.getInstance(this.findContext()).getLayout();
+		return layout != null && (layout.getStyle() & styleFlag) != 0;
 	}
 
 	public void createOutputPortPreferences() {

@@ -38,6 +38,8 @@
 	<string name="action_menu_effects">Эффекты</string>
 	<string name="action_menu_transport">Проигрыватель</string>
 	<string name="action_menu_settings">Настройки</string>
+	<string name="quick_sheet_play">Игра</string>
+	<string name="quick_sheet_edit">Правка</string>
 
 	<!-- <string name="action_tab_keyboard_toggle"></string> -->
 
@@ -247,6 +249,8 @@
 	<string name="preferences_general_title">Основные</string>
 	<string name="preferences_general_use_collection_browser_title">Браузер</string>
 	<!-- <string name="preferences_general_use_collection_browser_summary"></string> -->
+
+	<string name="preferences_view_category_title">Вид</string>
 
 	<string name="preferences_sound_category_title">Звук</string>
 	<string name="preferences_midi_output_port_title">MIDI порт</string>

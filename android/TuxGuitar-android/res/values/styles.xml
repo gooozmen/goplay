@@ -278,6 +278,35 @@
 		<item name="android:src">@drawable/ic_keyboard_arrow_down_gray_24dp</item>
 	</style>
 
+	<style name="TGQuickSheetButton" parent="TGImageButton">
+		<item name="android:layout_width">36dp</item>
+		<item name="android:layout_height">36dp</item>
+		<item name="android:layout_margin">4dp</item>
+	</style>
+
+	<style name="TGQuickSheetButton.Metronome">
+		<item name="android:src">@drawable/ic_metronome_white_24dp</item>
+	</style>
+
+	<style name="TGQuickSheetButton.CountIn">
+		<item name="android:src">@drawable/ic_count_in_white_24dp</item>
+	</style>
+
+	<style name="TGQuickSheetButton.Keyboard">
+		<item name="android:src">@drawable/ic_edit_white_24dp</item>
+	</style>
+
+	<style name="TGQuickSheetMenuButton" parent="Widget.AppCompat.Button.Borderless">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">36dp</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:paddingLeft">16dp</item>
+		<item name="android:paddingRight">16dp</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:textColor">?attr/textLightColorSelector</item>
+		<item name="android:background">?android:selectableItemBackground</item>
+	</style>
+
 	<style name="TGKeyBoardButton.Select" >
 		<item name="android:src">@drawable/ic_keyboard_select_gray_24dp</item>
 	</style>

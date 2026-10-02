@@ -1,6 +1,7 @@
 package app.tuxguitar.android.view.tablature;
 
 import app.tuxguitar.android.action.impl.caret.TGMoveToAction;
+import app.tuxguitar.android.view.keyboard.TGTabKeyboardController;
 import app.tuxguitar.document.TGDocumentContextAttributes;
 import app.tuxguitar.editor.action.TGActionProcessor;
 import app.tuxguitar.graphics.control.TGBeatImpl;
@@ -36,14 +37,18 @@ public class TGSongViewAxisSelector {
 					if (beat != null) {
 						TGCaret caret = this.controller.getCaret();
 						TGString string;
+						boolean openEditor = false;
 						if( !track.hasTablature() ) {
-							boolean sameBeat = (caret.getTrack() == track && caret.getSelectedBeat() == beat);
+							boolean sameBeat = (caret.getSelectedBeat() != null && beat != null && caret.getTrack() != null
+								&& caret.getTrack().getNumber() == track.getNumber()
+								&& caret.getSelectedBeat().getStart() == beat.getStart());
 							TGNote scoreNote = findNearestScoreNote(measure, beat, y);
 							string = (scoreNote != null ? track.getString(scoreNote.getString()) : null);
 							if( string == null ){
 								string = caret.getSelectedString();
 							}
-							caret.setNoteFocus(sameBeat && !requestSmartMenu);
+							caret.setNoteFocus(scoreNote != null && !requestSmartMenu);
+							openEditor = sameBeat && !requestSmartMenu;
 						} else {
 							string = findSelectedString(measure, y);
 							if( string == null ){
@@ -58,6 +63,9 @@ public class TGSongViewAxisSelector {
 
 						if( string != null ) {
 							this.callMoveTo(track, measure, beat, string, smartMenuProperties);
+						}
+						if( openEditor ) {
+							TGTabKeyboardController.getInstance(this.controller.getContext()).show();
 						}
 
 						return true;

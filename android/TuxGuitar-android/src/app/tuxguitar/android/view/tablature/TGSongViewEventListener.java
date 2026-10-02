@@ -13,6 +13,7 @@ import app.tuxguitar.android.menu.controller.impl.fragment.TGMainMenu;
 import app.tuxguitar.android.activity.TGActivity;
 import app.tuxguitar.android.activity.TGActivityController;
 import app.tuxguitar.android.view.keyboard.TGTabKeyboardController;
+import app.tuxguitar.android.view.sheet.TGQuickSheetController;
 
 public class TGSongViewEventListener implements TGEventListener {
 
@@ -63,6 +64,7 @@ public class TGSongViewEventListener implements TGEventListener {
 
 	private void updateKeyboardMode() {
 		TGTabKeyboardController.getInstance(this.songView.getContext()).updateMode();
+		TGQuickSheetController.getInstance(this.songView.getContext()).updateItems();
 	}
 
 	private void requestTempoDisplayUpdate() {

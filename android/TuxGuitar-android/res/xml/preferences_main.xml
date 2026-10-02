@@ -16,6 +16,36 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="view.settings"
+        android:title="@string/preferences_view_category_title"
+        app:iconSpaceReserved="false">
+
+        <CheckBoxPreference
+            android:key="view.show.score"
+            android:title="@string/action_view_layout_show_score"
+            android:persistent="false"
+            app:iconSpaceReserved="false"/>
+
+        <CheckBoxPreference
+            android:key="view.show.multitrack"
+            android:title="@string/action_view_layout_show_multitrack"
+            android:persistent="false"
+            app:iconSpaceReserved="false"/>
+
+        <CheckBoxPreference
+            android:key="view.show.chord.name"
+            android:title="@string/action_view_layout_show_chord_name"
+            android:persistent="false"
+            app:iconSpaceReserved="false"/>
+
+        <CheckBoxPreference
+            android:key="view.show.chord.diagram"
+            android:title="@string/action_view_layout_show_chord_diagram"
+            android:persistent="false"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:key="sound.settings"
         android:title="@string/preferences_sound_category_title"
         app:iconSpaceReserved="false">

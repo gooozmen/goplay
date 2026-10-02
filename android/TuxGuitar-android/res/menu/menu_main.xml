@@ -4,11 +4,6 @@
       tools:context="app.tuxguitar.android.TGActivity" >
 
     <item
-        android:id="@+id/action_tab_keyboard_toggle"
-        android:icon="@drawable/ic_edit_white_24dp"
-        android:title="@string/action_tab_keyboard_toggle"
-        app:showAsAction="always"/>
-    <item
         android:id="@+id/action_transport_play"
         android:icon="@drawable/ic_play_circle_outline_white_24dp"
         android:title="@string/action_transport_play"
@@ -19,37 +14,9 @@
         app:actionLayout="@layout/view_tempo_menu_item"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/action_menu_edit"
-        android:title="@string/action_menu_edit"/>
-    <item
-        android:id="@+id/action_menu_view"
-        android:title="@string/action_menu_view"/>
-    <item
-        android:id="@+id/action_menu_composition"
-        android:title="@string/action_menu_composition"/>
-    <item
-        android:id="@+id/action_menu_track"
-        android:title="@string/action_menu_track"/>
-    <item
-        android:id="@+id/action_menu_measure"
-        android:title="@string/action_menu_measure"/>
-    <item
-        android:id="@+id/action_menu_beat"
-        android:title="@string/action_menu_beat"/>
-    <item
-        android:id="@+id/action_menu_duration"
-        android:title="@string/action_menu_duration"/>
-    <item
-        android:id="@+id/action_menu_dynamic"
-        android:title="@string/action_menu_dynamic"/>
-    <item
-        android:id="@+id/action_menu_effects"
-        android:title="@string/action_menu_effects"/>
-    <item
-        android:id="@+id/action_menu_transport"
-        android:title="@string/action_menu_transport"/>
-    <item
         android:id="@+id/action_menu_settings"
-        android:title="@string/action_menu_settings"/>
+        android:icon="@drawable/ic_settings_white_24dp"
+        android:title="@string/action_menu_settings"
+        app:showAsAction="always"/>
 
 </menu>
